@@ -1,5 +1,5 @@
 module Dossier
-  module Display
+  class Display
     VERSION = "0.0.1"
   end
 end

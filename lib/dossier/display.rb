@@ -1,7 +1,8 @@
+require "dossier"
 require "dossier/display/version"
 
 module Dossier
-  module Display
+  class Display
     # Your code goes here...
   end
 end
