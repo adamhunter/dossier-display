@@ -21,37 +21,37 @@ the current report through the `report` method.
 In the initializer *used for global display settings*
 
 ```ruby
-  # config/initializers/dossier-display.rb
-  Dossier::Display.configure do |config|
-    config.table.class = 'table.table-striped.table-bordered'
-    config.table.id    = -> { "table-#{report.name.parameterize}" }
-  end
+# config/initializers/dossier-display.rb
+Dossier::Display.configure do |config|
+  config.table.class = 'table.table-striped.table-bordered'
+  config.table.id    = -> { "table-#{report.name.parameterize}" }
+end
 ```
 
 ### Specific Report Display Settings
 For an individual report *used to configure display for a single report*
 
 ```ruby
-  # inside of the report you want to customize
-  class MyReport < Dossier::Report
-    # your report code...
-    class Display < Dossier::Display
-      configure do |config|
-        config.table.id = 'table.table-striped.table-customized.table-fancified'
-        config.td.style = ->(v, i) { "color:#{color_for_index(i)};" }
-        config.hide     = :headers_to_hide
-      end
-      
-      # first two columns should be red
-      def color_for_index(i)
-        i < 2 ? 'red' : 'auto'
-      end
+# inside of the report you want to customize
+class MyReport < Dossier::Report
+  # your report code...
+  class Display < Dossier::Display
+    configure do |config|
+      config.table.id = 'table.table-striped.table-customized.table-fancified'
+      config.td.style = ->(v, i) { "color:#{color_for_index(i)};" }
+      config.hide     = :headers_to_hide
+    end
+    
+    # first two columns should be red
+    def color_for_index(i)
+      i < 2 ? 'red' : 'auto'
+    end
 
-      def headers_to_hide
-        %w[id embezzled_amount]
-      end
+    def headers_to_hide
+      %w[id embezzled_amount]
     end
   end
+end
 ```
 
 ## Options
